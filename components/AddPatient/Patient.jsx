@@ -11,34 +11,24 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 
-const PateintType = () => {
+const PateintType = ({navigation}) => {
   return (
     <View style={Styles.maincontainer}>
-    <View>
-    <Text style={Styles.mainheading}>Select Pateint Type</Text>
-    </View>
         
 
         <View style={Styles.btncontainer}>
       <View style={Styles.subcontainer}>
-          <TouchableOpacity style={Styles.btn}>
+          <TouchableOpacity style={Styles.btn} onPress={()=> navigation.navigate('Enter Pateint Details')}>
           <Ionicons  name="person-remove" size={32} />
           <Text style={Styles.btntext}>OutPateint</Text>
           </TouchableOpacity>
       </View>
       <View style={Styles.subcontainer1}>
-          <TouchableOpacity style={Styles.btn}>
+          <TouchableOpacity style={Styles.btn} onPress={()=> navigation.navigate('Enter Pateint Details')}>
           <Ionicons style={Styles.icon} name="person" size={32} />
           <Text style={Styles.btntext}>InPateints</Text>
           </TouchableOpacity>
       </View>
-      </View>
-
-      <View style={Styles.downbtn}>
-        <TouchableOpacity>
-        <Text style={Styles.text} >Next</Text>
-        </TouchableOpacity>
-        <MaterialCommunityIcons name='greater-than' size={17} />
       </View>
 
    
@@ -53,19 +43,12 @@ const Styles = StyleSheet.create({
       height:'100%',
       width:'100%',
       alignItems:'center',
-      backgroundColor:'#ebedfa'
+      backgroundColor:'#ebedfa',
+      justifyContent:'center'
     },
-    mainheading:{
-      marginTop:'10%',
-      width:'100%',
-      fontSize:30,
-      fontFamily: 'Times New Roman',
-    
-    },
+   
     btncontainer:{
              width:"75%",
-             marginTop:'40%',
-
 
     },
     subcontainer:{
@@ -91,18 +74,7 @@ const Styles = StyleSheet.create({
 
     },
    
-    downbtn:{
-      flexDirection:'row',
-      marginTop:'80%',
-      marginLeft:'70%',
-      alignItems:'center'
-
-    },
-    text:{
-      fontSize:20,
-      marginRight:3,
-      color:'#8f9094'
-    }
+   
 
 })
 

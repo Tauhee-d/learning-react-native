@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text,StyleSheet, TextInput, TouchableOpacity} from "react-native";
 // import Checkbox from 'expo-checkbox'
 
-const Signup = () => {
+const Signup = ({navigation}) => {
   return (
     <>
     <View style={style.maincontainer}>
@@ -32,7 +32,7 @@ const Signup = () => {
         <Checkbox style={style.checkbox}  />
         <Text>I've read </Text>
     </View> */}
-    <TouchableOpacity style={style.button}>
+    <TouchableOpacity style={style.button} onclixk >
         <Text style={style.buttontext}>Next</Text>
     </TouchableOpacity>
 
@@ -87,7 +87,9 @@ const style = StyleSheet.create({
         borderWidth:1,
         textAlign:'center',
         color:"white",
-        backgroundColor:"black"
+        backgroundColor:"black",
+        padding:10,
+        borderRadius:15
         
 
         

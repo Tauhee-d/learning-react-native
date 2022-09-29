@@ -2,19 +2,21 @@ import React from 'react'
 import bg from './Images/home.webp'
 import {View,TouchableOpacity,StyleSheet,Text,TextInput, ImageBackground} from 'react-native'
 
-function Home() {
+function Home({navigation}) {
   return (
     <>
    <View style={style.maincontainer} >
         <ImageBackground source={bg} style={style.bg}>
+            {/* <View style={style.container}> */}
             <View style={style.buttoncontainer}>
-                <TouchableOpacity style={style.button}>
+                <TouchableOpacity style={style.button} onPress={() => navigation.navigate('SigninScreen')}>
                 <Text style={style.buttonlogin}>LOG IN</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={style.button}>
+            <TouchableOpacity style={style.button} onPress={()=> navigation.navigate('SignupScreen')} >
                 <Text style={style.buttonregister}>REGISTER</Text>
             </TouchableOpacity>
             </View>
+            {/* </View> */}
 
         </ImageBackground>
        
@@ -25,8 +27,8 @@ function Home() {
 const style = StyleSheet.create({
         maincontainer:{
         height:"100%",
-        justifyContent:'center',
-        alignItems:'center',
+        width:'100%',
+
     },
     bg:{
         flexDirection:"row",
@@ -34,42 +36,44 @@ const style = StyleSheet.create({
         width:"100%",
     },
     buttoncontainer:{
-            marginTop:636,
-            height:70,
+            flex:1,
             width:'100%',
             flexDirection:'row',
-            backgroundColor:'white'
-    },
-    button:{
-        // width:167,
-        // height:100,
-        flex:1,
-        // marginTop:655,
-        // backgroundColor:"white",
+            alignItems:'flex-end',
+            padding:5,
+            
+            
+        },
+        button:{
+            
+            // backgroundColor:'white',
+            flex:1,
+            alignItems:'stretch',
+            padding:15,
+     
         
     },
     buttonlogin:{
         borderWidth:1,
-        width:190,
         padding:8,
         fontSize:20,
-        marginTop:12,
-        marginLeft:8,
         justifyContent:'space-between',
         textAlign:'center',
-        borderRadius:8,
+        backgroundColor:'black',
+        borderRadius:50,
+        color:'white',
+
+
       
     },
     buttonregister:{
         borderWidth:1,
-        width:190,
         padding:8,
         fontSize:20,
-        marginTop:12,
         marginLeft:8,
         justifyContent:'space-between',
         textAlign:'center',
-        borderRadius:8,
+        borderRadius:50,
         color:'white',
         backgroundColor:'black'
     }

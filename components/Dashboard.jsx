@@ -3,39 +3,41 @@ import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { MaterialIcons } from "@expo/vector-icons";
 
-const Dashboard = () => {
+const Dashboard = ({navigation}) => {
   return (
     <View style={Styles.maincontainer}>
       <View style={Styles.container}>
         <View style={Styles.containerheading}>
-          <Ionicons name="md-menu-sharp" size={32} />
-          <Text style={Styles.heading}>Patient Dashboard</Text>
+          <Ionicons style={Styles.icon} name="md-menu-sharp" size={25} />
+          <Text style={Styles.heading}> Dashboard</Text>
+          <Text></Text>
         </View>
+
         <View style={Styles.subcontainer}>
           <Text style={Styles.subheading}> Patient Options</Text>
           <View style={Styles.component}>
-            <View style={Styles.subcomponentadd}>
-              <TouchableOpacity>
-                <Ionicons style={Styles.texticon} name="person-add" size={32} />
-                <Text style={Styles.texticon}>Add Patient</Text>
+            <View style={Styles.subcomponent}>
+              <TouchableOpacity onPress={() => navigation.navigate('Select Patient Type')}>
+                <Ionicons style={Styles.textcolor} name="person-add" size={25} />
+                <Text style={Styles.textcolor}>Add Patient</Text>
               </TouchableOpacity>
             </View>
 
             <View style={Styles.subcomponent}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={ () => navigation.navigate('Search For Patient')}>
                 <Ionicons
                   style={Styles.textcolor}
                   name="person-remove"
-                  size={32}
+                  size={25}
                 />
-                <Text style={Styles.textcolor}>OutPatients</Text>
+                <Text style={Styles.textcolor}>OutPatients List</Text>
               </TouchableOpacity>
             </View>
 
             <View style={Styles.subcomponent}>
-              <TouchableOpacity>
-                <Ionicons style={Styles.textcolor} name="person" size={32} />
-                <Text style={Styles.textcolor}>InPatients</Text>
+              <TouchableOpacity onPress={ () => navigation.navigate('Search For Patient')}>
+                <Ionicons style={Styles.textcolor} name="person" size={25} />
+                <Text style={Styles.textcolor}>InPatients List</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -49,7 +51,7 @@ const Dashboard = () => {
                 <Ionicons
                   style={Styles.textcolor}
                   name="receipt-outline"
-                  size={32}
+                  size={25}
                 />
                 <Text style={Styles.textcolor}>Medical Records</Text>
               </TouchableOpacity>
@@ -61,24 +63,15 @@ const Dashboard = () => {
           <Text style={Styles.subheading}> Payment Options</Text>
           <View style={Styles.components}>
             <View style={Styles.subcomponent}>
-              <TouchableOpacity>
+              <TouchableOpacity 
+                onPress={ () => navigation.navigate('Search For Patient')}
+              >
                 <MaterialIcons
                   style={Styles.textcolor}
                   name="payments"
-                  size={32}
+                  size={25}
                 />
-                <Text style={Styles.textcolor}>Make payment</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={Styles.subcomponents}>
-              <TouchableOpacity>
-                <MaterialIcons
-                  style={Styles.textcolor}
-                  name="history"
-                  size={32}
-                />
-                <Text style={Styles.textcolor}>Payment History</Text>
+                <Text style={Styles.textcolor}>Payments</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -103,15 +96,18 @@ const Styles = StyleSheet.create({
   },
   containerheading: {
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
+  },
+  icon:{
+    marginLeft:20
   },
   heading: {
-    fontSize: 30,
-    fontFamily: "Regular",
+    fontSize: 20,
+    marginRight:'40%'
   },
   subcontainer: {},
   subheading: {
-    fontSize: 21,
+    fontSize: 15,
     marginLeft: "5%",
     marginTop: "10%",
   },
@@ -162,30 +158,12 @@ const Styles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 10
   },
-  subcomponentadd: {
-    width: 80,
-    height: 80,
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-    borderRadius: 20,
-    backgroundColor: "#324ae6",
-    shadowOffset: {
-      width: 0,
-      height: 6,
-    },
-    shadowOpacity:  0.20,
-    shadowRadius: 5,
-    elevation: 10
-  },
+ 
   textcolor: {
     color: "#8f9094",
     textAlign: "center",
   },
-  texticon: {
-    textAlign: "center",
-    color: "white",
-  },
+ 
 });
 
 export default Dashboard;

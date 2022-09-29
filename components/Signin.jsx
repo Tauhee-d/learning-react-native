@@ -2,7 +2,9 @@ import React from 'react'
 import { View, Text,StyleSheet, TextInput, TouchableOpacity} from "react-native";
 
 
-const Signin = () => {
+
+
+const Signin = ({navigation}) => {
   return (
 <>
     <View style={style.maincontainer}>
@@ -24,7 +26,7 @@ const Signin = () => {
          secureTextEntry={true}/>
     </View>
    
-    <TouchableOpacity style={style.button}>
+    <TouchableOpacity style={style.button} onPress={() => navigation.navigate('Dashboard')} >
         <Text style={style.buttontext}>Sign in</Text>
     </TouchableOpacity>
 
@@ -66,15 +68,21 @@ const style = StyleSheet.create({
     },
     button:{
         fontSize:40,
-        marginTop:50
+        marginTop:50,
     },
     buttontext:{
+        borderRadius:15,
         fontSize:20,
         borderWidth:1,
         textAlign:'center',
         color:"white",
-        backgroundColor:"black"
+        backgroundColor:"black",
+        padding:10
+        
     
+    },
+    inputcontainer:{
+        
     }
 })
 

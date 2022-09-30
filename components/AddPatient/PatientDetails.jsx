@@ -1,4 +1,11 @@
-import {StyleSheet,Text,View,  ScrollView,TextInput,TouchableOpacity,} from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import React from "react";
 import {
   MaterialCommunityIcons,
@@ -10,8 +17,8 @@ import { useState } from "react/cjs/react.development";
 
 const PatientDetails = ({ navigation }) => {
   const Phase1 = () => {
-      const [Enable , setEnable] = useState('D1')
-      const [Treatment , setTreatment] = useState('T1')
+    const [Enable, setEnable] = useState("D1");
+    const [Treatment, setTreatment] = useState("T1");
 
     return (
       <View style={styles.container}>
@@ -42,13 +49,15 @@ const PatientDetails = ({ navigation }) => {
           />
         </View>
         <View style={styles.subcontainer2}>
-          <MaterialCommunityIcons
-            style={styles.icon}
-            name="human-male"
-            size={70}
-          />
-          <TextInput style={styles.subcontainer1txt} placeholder="Age" />
-          <TextInput style={styles.subcontainer1txt} placeholder="Weight" />
+          <View style={styles.iconcontainer}>
+            <MaterialCommunityIcons
+              style={styles.icon}
+              name="human-male"
+              size={70}
+            />
+          </View>
+          <TextInput style={styles.subtxt} placeholder="Age" />
+          <TextInput style={styles.subtxt} placeholder="Weight" />
           <View style={styles.subcontainer1}>
             <View style={styles.genderContainer}>
               <Text style={styles.genderheading}>Gender:</Text>
@@ -69,62 +78,85 @@ const PatientDetails = ({ navigation }) => {
           <View style={styles.doctor}>
             <Text style={styles.txt}>Doctor:</Text>
             <View style={styles.picker}>
-                <Picker
-                  selectedValue={Enable}
-                  style={{width:'100%'}}
-                  onValueChange={(itemValue) => setEnable(itemValue)}
-
-
-                >
-                  <Picker.Item style={styles.pickertxt} label='Dr.Josh' value='D1'/>
-                  <Picker.Item style={styles.pickertxt} label='Dr.Bosh' value='D2'/>
-                  <Picker.Item style={styles.pickertxt} label='Dr.Mosh' value='D3'/>
-                  <Picker.Item style={styles.pickertxt} label='Dr.Zab' value='D4'/>
-                </Picker>
+              <Picker
+                selectedValue={Enable}
+                style={{ width: "100%" }}
+                onValueChange={(itemValue) => setEnable(itemValue)}
+              >
+                <Picker.Item
+                  style={styles.pickertxt}
+                  label="Dr.Josh"
+                  value="D1"
+                />
+                <Picker.Item
+                  style={styles.pickertxt}
+                  label="Dr.Bosh"
+                  value="D2"
+                />
+                <Picker.Item
+                  style={styles.pickertxt}
+                  label="Dr.Mosh"
+                  value="D3"
+                />
+                <Picker.Item
+                  style={styles.pickertxt}
+                  label="Dr.Zab"
+                  value="D4"
+                />
+              </Picker>
             </View>
-
           </View>
           <View style={styles.Treatment}>
             <Text style={styles.txt}>Treatment:</Text>
             <View style={styles.picker}>
-                <Picker
-                  selectedValue={Treatment}
-                  style={{width:'100%'}}
-                  onValueChange={(itemValue) => setTreatment(itemValue)}
-
-
-                >
-                  <Picker.Item style={styles.pickertxt} label='Surgery' value='T1'/>
-                  <Picker.Item style={styles.pickertxt} label='Neurology' value='T2'/>
-                  <Picker.Item style={styles.pickertxt} label='Cardiology' value='T3'/>
-                </Picker>
+              <Picker
+                selectedValue={Treatment}
+                style={{ width: "100%" }}
+                onValueChange={(itemValue) => setTreatment(itemValue)}
+              >
+                <Picker.Item
+                  style={styles.pickertxt}
+                  label="Surgery"
+                  value="T1"
+                />
+                <Picker.Item
+                  style={styles.pickertxt}
+                  label="Neurology"
+                  value="T2"
+                />
+                <Picker.Item
+                  style={styles.pickertxt}
+                  label="Cardiology"
+                  value="T3"
+                />
+              </Picker>
             </View>
-
           </View>
-
         </View>
       </View>
     );
   };
 
   const Phase2 = () => {
-    return(
-      <View style={styles.container}>
-
-      <View style={styles.subcontainer2}>
-      <TextInput style={styles.s2txt1} placeholder='Address'/>
-    </View>
-    <View style={styles.subcontainer1}>
-      <TextInput style={styles.c3txt1} placeholder='City'/>
-      <TextInput style={styles.c3txt1} placeholder='State'/>
-    </View>
-    <View style={styles.subcontainer1}>
-      <TextInput style={styles.c3txt1} placeholder='Country'/>
-      <TextInput style={styles.c3txt1} placeholder='Pin Code'/>
-    </View> 
-    </View> 
-    )
-  }
+    return (
+      <View>
+        
+        <View style={styles.phase2container2}>
+          <TextInput style={styles.s2txt1} placeholder="Address" />
+        </View>
+      <View style={styles.container1}>
+        <View style={styles.phase2container1}>
+          <TextInput style={styles.c3txt1} placeholder="City" />
+          <TextInput style={styles.c3txt1} placeholder="State" />
+        </View>
+        <View style={styles.phase2container1}>
+          <TextInput style={styles.c3txt1} placeholder="Country" />
+          <TextInput style={styles.c3txt1} placeholder="Pin Code" />
+        </View>
+      </View>
+      </View>
+    );
+  };
 
   const Submit = () => {
     const onSubmit = () => {
@@ -145,9 +177,6 @@ const PatientDetails = ({ navigation }) => {
       <Phase1 />
       <Phase2 />
       <Submit />
-
-      
-  
     </ScrollView>
   );
 };
@@ -158,26 +187,27 @@ const styles = StyleSheet.create({
   maincontainer: {
     backgroundColor: "#ebedfa",
     padding: 10,
-    width:'100%',
-    height:'100%',
+    width: "100%",
+    height: "100%",
   },
 
   container: {
     flexDirection: "row",
-    width:'100%',
- 
-    justifyContent:'space-between'
+    width: "100%",
+    marginTop: 30,
+    justifyContent: "space-between",
   },
-  subcontainer1:{
-    width:'50%',
-
+  container1:{
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
-  subcontainer2:{
-    width:'40%',
+  subcontainer1: {
+    width: "50%",
+  },
+  subcontainer2: {
+    width: "40%",
     // justifyContent:'center',
-    alignItems:'center'
-
-
+    alignItems: "center",
   },
   subcontainer1txt: {
     fontSize: 15,
@@ -190,6 +220,19 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 10,
   },
+  subtxt:{
+    fontSize: 15,
+    backgroundColor: "white",
+    padding: 10,
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: "#d9d9d9",
+    alignItems: "center",
+    textAlign: "center",
+    marginTop: 10,
+    width:130
+  },
+
 
   submit: {
     borderRadius: 20,
@@ -199,15 +242,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 20,
   },
-  icon:{
-    justifyContent:'center',
-    alignItems:'center',
-    width:100,
-    backgroundColor:'white',
+  iconcontainer: {
+    backgroundColor: "white",
     borderRadius: 20,
     borderWidth: 2,
     borderColor: "#d9d9d9",
-    alignContent:'center'
+    justifyContent: "center",
+    alignItems: "center",
+    
   },
   btntxt: {
     backgroundColor: "#324ae5",
@@ -218,31 +260,75 @@ const styles = StyleSheet.create({
     fontSize: 20,
     borderRadius: 30,
   },
+  genderContainer:{
+    marginTop:10,
+    width:100,
+    
+  },
+  genderheading:{
+    padding:1
+  },
   gender: {
     flexDirection: "row",
-  },
-
-  doctor:{
-    
-    width:'100%',
-    color:'black',
-    padding:5,
-    marginTop:20,
-    shadowOffset: {
-        width: 0,
-        height: 6,
-      },
-      shadowOpacity:  0.20,
-      shadowRadius: 5,
-      elevation: 10
+    padding:2,
+    justifyContent:'space-between',
+    width:100
 
   },
-  picker:{
-    backgroundColor:'white',
+  phase2container2:{
+    backgroundColor: "white",
     borderRadius: 20,
     borderWidth: 2,
     borderColor: "#d9d9d9",
-    marginTop:10,
+    justifyContent: "center",
+    alignItems: "center",
+    padding:10,
+    marginTop:10
+  },
+ 
+  c3txt1:{
+    backgroundColor: "white",
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: "#d9d9d9",
+    textAlign:'center',
+    padding:10,
+    width:160,
+    marginTop:10
 
-  }
+  },
+
+  doctor: {
+    width: "100%",
+    color: "black",
+    padding: 5,
+    marginTop: 20,
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 10,
+  },
+  Treatment: {
+    width: "100%",
+    color: "black",
+    padding: 5,
+    marginTop: 20,
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 10,
+  },
+  picker: {
+    backgroundColor: "white",
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: "#d9d9d9",
+    marginTop: 10,
+  },
 });

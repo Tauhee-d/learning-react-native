@@ -1,17 +1,41 @@
-import {View,Text,StyleSheet,TouchableOpacity,TextInput, ActivityIndicator} from 'react-native'
+import {View,Text,StyleSheet,TouchableOpacity,TextInput, ActivityIndicator, FlatList,ScrollView} from 'react-native'
 import RadioForm from 'react-native-simple-radio-button';
 
-// import { Input } from "@rneui/themed";
 import { Ionicons,Fontisto,MaterialIcons} from '@expo/vector-icons';
-import {Picker} from"@react-native-picker/picker";
+// import {Picker} from"@react-native-picker/picker";
 import  {useEffect, useState} from'react';
 import  PropsType  from 'prop-types';
+import axios from 'axios';
 
 
 
 const SearchForPatient = ({navigation}) =>{
 
 
+
+  useEffect(() =>{
+    patientList()
+  },[])
+
+    
+
+  const [responseData,setResponseData] = useState()
+  const patientList = () => {
+
+  
+
+  axios
+  .get("http://localhost:8000/addOP")
+  .then((response) => {
+      setResponseData(JSON.stringify(response.data));
+      // setResponseData(response.data)
+      // console.log(response.data);
+  })
+  .catch(error => console.log(error))
+  }
+
+  
+  
 
 
     const SearchBar = (props) => {
@@ -38,76 +62,80 @@ const SearchForPatient = ({navigation}) =>{
 
       const Body = (props) => {
 
-
-        useEffect(() =>{}, []);
-
-
+        // console.log(patientList);
         return(
 
-
-
+          
+          
+          
+        
           <View style={style.container}>
+            
+            <FlatList
+            data={[responseData]}
+            renderItem={(data)=>{
+              // console.log(data.item)
+              return (<Text> {data.item} </Text>) 
+              
+              
+            }}
+            />
+
+
+{/* <FlatList> */}
+
+  {/* <View>
+            {
+              responseData.map((item)=> <Text>{item.fName}</Text>)
+            }
+  </View> */}
+{/* {
+  responseData.map((patientList) => {
+
           <TouchableOpacity onPress={ () => navigation.navigate('Patient Details')}
-          style={style.subcontainer}>
-                <View>
-                  <Ionicons name='person' size={35} />
-                </View>
-                <View style={style.txtcontainer}>
-                  <Text style={style.heading}>Abc</Text>
-                  <Text style={style.txt}>Patient Id:</Text>
-                  <Text style={style.txt}>UHID:</Text>
-                  <Text style={style.txt}>Dr.xyz</Text>
-                  <Text style={style.txt}>Added On:</Text>
-                </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={ () => navigation.navigate('Patient Details')}
-          style={style.subcontainer}>
-                <View>
-                  <Ionicons name='person' size={35} />
-                </View>
-                <View style={style.txtcontainer}>
-                  <Text style={style.heading}>Patient Name</Text>
-                  <Text style={style.txt}>Patient Id</Text>
-                  <Text style={style.txt}>Assigned Doctor</Text>
-                </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={ () => navigation.navigate('Patient Details')}
-          style={style.subcontainer}>
-                <View>
-                  <Ionicons name='person' size={35} />
-                </View>
-                <View style={style.txtcontainer}>
-                  <Text style={style.heading}>Patient Name</Text>
-                  <Text style={style.txt}>Patient Id</Text>
-                  <Text style={style.txt}>Assigned Doctor</Text>
-                </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={ () => navigation.navigate('Patient Details')}
-          style={style.subcontainer}>
-                <View>
-                  <Ionicons name='person' size={35} />
-                </View>
-                <View style={style.txtcontainer}>
-                  <Text style={style.heading}>Patient Name</Text>
-                  <Text style={style.txt}>Patient Id</Text>
-                  <Text style={style.txt}>Assigned Doctor</Text>
-                </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={ () => navigation.navigate('Patient Details')}
-          style={style.subcontainer}>
-                <View>
-                  <Ionicons name='person' size={35} />
-                </View>
-                <View style={style.txtcontainer}>
-                  <Text style={style.heading}>Patient Name</Text>
-                  <Text style={style.txt}>Patient Id</Text>
-                  <Text style={style.txt}>Assigned Doctor</Text>
-                </View>
-          </TouchableOpacity>
+                style={style.subcontainer}>
+                      <View>
+                        <Ionicons name='person' size={35} />
+                      </View>
+                      <View style={style.txtcontainer}>
+                        <Text style={style.heading}>cnjkcdxj</Text>
+                        <Text style={style.txt}>patientID:</Text>
+                        <Text style={style.txt}>UHID:</Text>
+                        <Text style={style.txt}>Dr.xyz</Text>
+                        <Text style={style.txt}>Added On:</Text>
+                      </View>
+                </TouchableOpacity>
+  })
+} */}
+      {/* </FlatList> */}
+
+
+            {/* <FlatList data={record.patientData} keyExtractor={(item,index)}
+              renderItem={({item}) => {
+                return */}
+                {/* <TouchableOpacity onPress={ () => navigation.navigate('Patient Details')}
+                style={style.subcontainer}>
+                      <View>
+                        <Ionicons name='person' size={35} />
+                      </View>
+                      <View style={style.txtcontainer}>
+                        <Text style={style.heading}>Abc</Text>
+                        <Text style={style.txt}>patientID:</Text>
+                        <Text style={style.txt}>UHID:</Text>
+                        <Text style={style.txt}>Dr.xyz</Text>
+                        <Text style={style.txt}>Added On:</Text>
+                      </View>
+                </TouchableOpacity> */}
+       
+       
+          
+        
         
           
          
         </View>
+      
+
         )
       }
 
@@ -117,10 +145,15 @@ const SearchForPatient = ({navigation}) =>{
     <View style={style.container}>
         <SearchBar/>
         <Body/>
+
         
     
     </View>
     </View>
+
+    
+
+
   )  
 }
 

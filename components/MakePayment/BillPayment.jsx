@@ -3,7 +3,7 @@ import RadioForm from 'react-native-simple-radio-button';
 
 // import { Input } from "@rneui/themed";
 import { Ionicons,Fontisto,MaterialIcons} from '@expo/vector-icons';
-import {Picker} from"@react-native-picker/picker";
+// import {Picker} from"@react-native-picker/picker";
 import  {useState} from'react';
 
 

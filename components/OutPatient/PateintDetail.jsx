@@ -1,6 +1,6 @@
 import {View,Text,StyleSheet,TouchableOpacity} from 'react-native'
 import { Ionicons,Fontisto,MaterialIcons} from '@expo/vector-icons';
-import {Picker} from"@react-native-picker/picker";
+// import {Picker} from"@react-native-picker/picker";
 import  {useState} from'react';
 
 
@@ -51,7 +51,7 @@ const PateintDetails = ({navigation}) =>{
         
         return (
           <View style={style.pickercontainer}>
-              <Picker
+              {/* <Picker
                 selectedValue={Enable}
                 style={{  width:'100%' }}
                 mode={"dialog"}
@@ -64,7 +64,7 @@ const PateintDetails = ({navigation}) =>{
                 <Picker.Item style={style.pickertxt} label="D3"value="D3"/>
                 <Picker.Item style={style.pickertxt} label="D5"value="D5"/>
                 <Picker.Item style={style.pickertxt} label="D4"value="D4"/>
-              </Picker>
+              </Picker> */}
           </View>
        );
       }

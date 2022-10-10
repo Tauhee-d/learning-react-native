@@ -6,46 +6,115 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import {useState } from "react";
 import {
   MaterialCommunityIcons,
   Ionicons,
   FontAwesome,
 } from "@expo/vector-icons";
-import { Picker } from "@react-native-picker/picker";
-import { useState } from "react/cjs/react.development";
+import  RNPickerSelect  from "react-native-picker-select";
+import axios from "axios"
 
 const PatientDetails = ({ navigation }) => {
+
+ 
+    
+
+  const [patientID,setPatientID] = useState("")
+  const [uniqueHID,setUniqueHID] = useState("")
+  const [fName,setFName] = useState("")
+  const [lName,setLName] = useState("")
+  const [email,setEmail] = useState("")
+  const [phone,setPhone] = useState("")
+  const [age,setAge] = useState("")
+  const [weight,setWeight] = useState("")
+  const [gender,setGender] = useState("")
+  const [gName,setGName] = useState("")
+  const [gEmail,setGEmail] = useState("")
+  const [gPhone,setGPhone] = useState("")
+  const [address,setAddress] = useState("")
+  const [city,setCity] = useState("")
+  const [state,setState] = useState("")
+  const [country,setCountry] = useState("")
+  const [pin,setPin] = useState("")
+  const [doctorID,setDoctorID] = useState("")
+  const [treatmentID,setTreatmentID] = useState("")
+  // console.log("patientID:",patientID);
+
+const ApiPatientDetails =  () =>{
+
+ 
+  
+  axios.post("http://localhost:8000/addOP",
+  
+  {
+   
+
+    "patientID":patientID,
+    "uniqueHID":uniqueHID,
+    "fName":fName,
+    "lName":lName,
+    "email":email,
+    "phone":phone,
+    "age":age,
+    "weight":weight,
+    "gender":gender,
+    "gName":gName,
+    "gEmail":gEmail,
+    "gPhone":gPhone,
+    "address":address,
+    "city":city,
+    "state":state,
+    "country":country,
+    "pin":pin,
+    // "doctorID":"",
+    // "departmentID":""
+  }).then(res => console.log("data submitted"))
+  .catch(err => console.log("erroe",err))
+  
+    
+}
+
   const Phase1 = () => {
-    const [Enable, setEnable] = useState("D1");
-    const [Treatment, setTreatment] = useState("T1");
 
     return (
+
       <View style={styles.container}>
+
+
         <View style={styles.subcontainer1}>
-          <TextInput style={styles.subcontainer1txt} placeholder="Patient Id" />
+          <TextInput value={patientID} style={styles.subcontainer1txt} onChangeText={(e)=> {setPatientID(e)}}   placeholder="Patient Id" />
           <TextInput
             style={styles.subcontainer1txt}
             placeholder="Unique Health Id"
+            value={uniqueHID}
+            onChangeText={(e)=>setUniqueHID(e)}
           />
-          <TextInput style={styles.subcontainer1txt} placeholder="First Name" />
-          <TextInput style={styles.subcontainer1txt} placeholder="Last Name" />
-          <TextInput style={styles.subcontainer1txt} placeholder="Email" />
+          <TextInput value={fName} onChangeText={(e)=>{setFName(e)}} style={styles.subcontainer1txt} placeholder="First Name" />
+          <TextInput value={lName} onChangeText={(e)=>{setLName(e)}} style={styles.subcontainer1txt} placeholder="Last Name" />
+          <TextInput value={email} onChangeText={(e)=>{setEmail(e)}} style={styles.subcontainer1txt} placeholder="Email" />
           <TextInput
             style={styles.subcontainer1txt}
-            placeholder="Phone Number"
+            placeholder="Phone Number" 
+            focusable={true}
+            keyboardAppearance={true}
+            multiline={true}
+            value={phone} onChangeText={(e)=>{setPhone(e)}}
           />
           <TextInput
             style={styles.subcontainer1txt}
             placeholder="Guardian Name"
+            value={gName} onChangeText={(e)=>{setGName(e)}}
           />
           <TextInput
             style={styles.subcontainer1txt}
             placeholder="Guardian Email"
+            value={gEmail} onChangeText={(e)=>{setGEmail(e)}}
           />
           <TextInput
             style={styles.subcontainer1txt}
             placeholder="Guardian Phone no"
+            value={gPhone} onChangeText={(e)=>{setGPhone(e)}}
           />
         </View>
         <View style={styles.subcontainer2}>
@@ -56,80 +125,59 @@ const PatientDetails = ({ navigation }) => {
               size={70}
             />
           </View>
-          <TextInput style={styles.subtxt} placeholder="Age" />
-          <TextInput style={styles.subtxt} placeholder="Weight" />
+          <TextInput value={age} onChangeText={(e)=>{setAge(e)}} style={styles.subtxt} placeholder="Age" />
+          <TextInput value={weight} onChangeText={(e)=>{setWeight(e)}} style={styles.subtxt} placeholder="Weight" />
           <View style={styles.subcontainer1}>
             <View style={styles.genderContainer}>
               <Text style={styles.genderheading}>Gender:</Text>
               <View style={styles.gender}>
-                <TouchableOpacity>
+                <TouchableOpacity value={gender} onChangeText={(e)=>{setGender(e)}} >
                   <Ionicons name="male" size={20} />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity value={gender} onChangeText={(e)=>{setGender(e)}}>
                   <Ionicons name="female" size={20} />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                {/* <TouchableOpacity>
                   <FontAwesome name="transgender-alt" size={20} />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
               </View>
             </View>
           </View>
 
           <View style={styles.doctor}>
-            <Text style={styles.txt}>Doctor:</Text>
+            <Text  style={styles.txt}>Doctor:</Text>
             <View style={styles.picker}>
-              <Picker
-                selectedValue={Enable}
-                style={{ width: "100%" }}
-                onValueChange={(itemValue) => setEnable(itemValue)}
-              >
-                <Picker.Item
-                  style={styles.pickertxt}
-                  label="Dr.Josh"
-                  value="D1"
-                />
-                <Picker.Item
-                  style={styles.pickertxt}
-                  label="Dr.Bosh"
-                  value="D2"
-                />
-                <Picker.Item
-                  style={styles.pickertxt}
-                  label="Dr.Mosh"
-                  value="D3"
-                />
-                <Picker.Item
-                  style={styles.pickertxt}
-                  label="Dr.Zab"
-                  value="D4"
-                />
-              </Picker>
+
+            <RNPickerSelect
+            
+            value={doctorID}
+            onValueChange={(value) => {setDoctorID(value)}}
+            items={[
+                { label: 'Dr.Zab', value: 'D1' },
+                { label: 'Dr.Mac', value: 'D2' },
+                { label: 'Dr.Jack', value: 'D3' },
+            ]}
+        />
+
+       
             </View>
           </View>
           <View style={styles.Treatment}>
             <Text style={styles.txt}>Treatment:</Text>
             <View style={styles.picker}>
-              <Picker
-                selectedValue={Treatment}
-                style={{ width: "100%" }}
-                onValueChange={(itemValue) => setTreatment(itemValue)}
-              >
-                <Picker.Item
-                  style={styles.pickertxt}
-                  label="Surgery"
-                  value="T1"
-                />
-                <Picker.Item
-                  style={styles.pickertxt}
-                  label="Neurology"
-                  value="T2"
-                />
-                <Picker.Item
-                  style={styles.pickertxt}
-                  label="Cardiology"
-                  value="T3"
-                />
-              </Picker>
+
+            <RNPickerSelect
+            
+            value={treatmentID}
+            onValueChange={(value) => {setTreatmentID(value)}}
+            items={[
+                { label: 'Surgery', value: 'T1' },
+                { label: 'Neurology', value: 'T2' },
+                { label: 'Cardiology', value: 'T3' },
+            ]}
+        />
+
+             
             </View>
           </View>
         </View>
@@ -142,16 +190,16 @@ const PatientDetails = ({ navigation }) => {
       <View>
         
         <View style={styles.phase2container2}>
-          <TextInput style={styles.s2txt1} placeholder="Address" />
+          <TextInput value={address} onChangeText={(e)=>{setAddress(e)}} style={styles.s2txt1} placeholder="Address" />
         </View>
       <View style={styles.container1}>
         <View style={styles.phase2container1}>
-          <TextInput style={styles.c3txt1} placeholder="City" />
-          <TextInput style={styles.c3txt1} placeholder="State" />
+          <TextInput value={city} onChangeText={(e)=>{setCity(e)}} style={styles.c3txt1} placeholder="City" />
+          <TextInput value={state} onChangeText={(e)=>{setState(e)}} style={styles.c3txt1} placeholder="State" />
         </View>
         <View style={styles.phase2container1}>
-          <TextInput style={styles.c3txt1} placeholder="Country" />
-          <TextInput style={styles.c3txt1} placeholder="Pin Code" />
+          <TextInput value={country} onChangeText={(e)=>{setCountry(e)}} style={styles.c3txt1} placeholder="Country" />
+          <TextInput value={pin} onChangeText={(e)=>{setPin(e)}} style={styles.c3txt1} placeholder="Pin Code" />
         </View>
       </View>
       </View>
@@ -159,13 +207,16 @@ const PatientDetails = ({ navigation }) => {
   };
 
   const Submit = () => {
-    const onSubmit = () => {
-      navigation.navigate("Sucessfull");
-    };
+    // const onSubmit = () => {
+    //   navigation.navigate("Sucessfull");
+    // };
 
     return (
       <View style={styles.submit}>
-        <TouchableOpacity style={styles.button} onPress={onSubmit}>
+        <TouchableOpacity style={styles.button} onPress={()=>{
+          ApiPatientDetails()
+        }}>
+        {/* <TouchableOpacity style={styles.button} onPress={onSubmit}> */}
           <Text style={styles.btntxt}>Submit</Text>
         </TouchableOpacity>
       </View>

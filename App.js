@@ -27,15 +27,13 @@ const Stack = createNativeStackNavigator();
 export default function App() {
 
   return (
-    // <View>
-    //  <Temp/>
-    // </View>
+    
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='HomeScreen' screenOptions={{headerShown: false}} >
-        <Stack.Screen  name='HomeScreen' component={Home} />
-        <Stack.Screen  name='SigninScreen' component={Signin}/>
-        <Stack.Screen name='SignupScreen' component={Signup}/>
-        <Stack.Screen name='Dashboard' component={Dashboard}/>
+      <Stack.Navigator initialRouteName='HomeScreen'  >
+        <Stack.Screen  name='HomeScreen' component={Home} options={{headerShown:false}} />
+        <Stack.Screen  name='SigninScreen' component={Signin} options={{headerShown:false}}/>
+        <Stack.Screen name='SignupScreen' component={Signup} options={{headerShown:false}}/>
+        <Stack.Screen name='Dashboard' component={Dashboard} options={{headerShown:false}}/>
         <Stack.Screen name='Select Patient Type' component={PateintType}/>
         <Stack.Screen name='Enter Pateint Details' component={PatientDetails}/>
         <Stack.Screen name='Sucessfull' component={SucessAdding}/>
@@ -50,9 +48,7 @@ export default function App() {
     );
   }
   
-    //  <>
-    //  <Apitest/>
-    //  </> 
+    
   
 
 

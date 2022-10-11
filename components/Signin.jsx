@@ -1,13 +1,65 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text,StyleSheet, TextInput, TouchableOpacity} from "react-native";
+import Toast from 'react-native-toast-message'
 
 
 
 
 const Signin = ({navigation}) => {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    const clearTextInputs = () => {
+        setEmail('')
+        setPassword('')
+    }
+
+    const handleFormSubmit = () => {
+        if(email && password) {
+            console.log("login sucess");
+            const formData = {email,password}
+            console.log(formData);
+            clearTextInputs()
+            Toast.show({
+                type:"done",
+                position:'top',
+                topOffset:0,
+                text1:"login Sucessfull"
+            })
+            navigation.navigate('Shoptab')
+
+        }else {
+            console.log("All fields are required");
+            Toast.show({
+                type:"warning",
+                position:'top',
+                topOffset:0, 
+                text1:"All fields are required!"
+            })
+        }
+    }
+
+    const toastConfig = {
+        warning:({text1,text2,text3}) => (
+            <View style={{height:30, width:"100%",backgroundColor:"orange", padding:4}}>
+                <Text>{text1}</Text>
+                <Text>{text2}</Text>
+                {/* <Text>{text3}</Text> */}
+            </View>
+        ),
+        done:({text1,text2,text3}) => (
+            <View style={{height:30, width:"100%",backgroundColor:"green", padding:4}}>
+                <Text>{text1}</Text>
+                <Text>{text2}</Text>
+                {/* <Text>{text3}</Text> */}
+
+            </View>
+        )
+    }
   return (
 <>
     <View style={style.maincontainer}>
+        <Toast config={toastConfig} />
       <Text style={style.mainheading}>
         Sign in
       </Text>
@@ -16,17 +68,26 @@ const Signin = ({navigation}) => {
         <Text style={style.labels}>
             Enter your email
         </Text>
-        <TextInput style={style.inputstyle}/>
+        <TextInput style={style.inputstyle} 
+        value={email}
+        onChangeText={setEmail}
+        keyboardType={'email-address'}
+        />
     </View>
     <View style={style.inputcontainer}>
         <Text style={style.labels}>
             Enter your password
         </Text>
         <TextInput style={style.inputstyle}
-         secureTextEntry={true}/>
+         secureTextEntry={true} 
+         value={password}
+         onChangeText={setPassword}
+         />
+        
     </View>
    
-    <TouchableOpacity style={style.button} onPress={() => navigation.navigate('Dashboard')} >
+    <TouchableOpacity style={style.button} onPress={(handleFormSubmit) } >
+    {/* => navigation.navigate('Shoptab') */}
         <Text style={style.buttontext}>Sign in</Text>
     </TouchableOpacity>
 
@@ -34,6 +95,8 @@ const Signin = ({navigation}) => {
     
     </>  )
 }
+
+
 
 const style = StyleSheet.create({
     maincontainer:{

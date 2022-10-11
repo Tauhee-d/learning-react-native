@@ -2,16 +2,17 @@ import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { MaterialIcons } from "@expo/vector-icons";
+ 
 
 const Dashboard = ({navigation}) => {
   return (
     <View style={Styles.maincontainer}>
       <View style={Styles.container}>
-        <View style={Styles.containerheading}>
+        {/* <View style={Styles.containerheading}>
           <Ionicons style={Styles.icon} name="md-menu-sharp" size={25} />
           <Text style={Styles.heading}> Dashboard</Text>
           <Text></Text>
-        </View>
+        </View> */}
 
         <View style={Styles.subcontainer}>
           <Text style={Styles.subheading}> Patient Options</Text>

@@ -1,11 +1,75 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text,StyleSheet, TextInput, TouchableOpacity} from "react-native";
-// import Checkbox from 'expo-checkbox'
+import Toast from 'react-native-toast-message'
 
 const Signup = ({navigation}) => {
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
+
+
+    const clearTextInputs = () => {
+        setName('')
+        setEmail('')
+        setPassword('')
+        setConfirmPassword('')
+    }
+
+    const handleFormSubmit = () => {
+        if(name && email && password && confirmPassword) {
+             if(password === confirmPassword) {
+            console.log("Registration sucess");
+            const formData = {name,email,password,confirmPassword}
+            console.log(formData);
+            clearTextInputs()
+            Toast.show({
+                type:"done",
+                position:'top',
+                topOffset:0,
+                text1:"Registartion Sucessfull"
+            })
+        }else {
+            console.log("password and confirm password doesn't match");
+            Toast.show({
+                type:"warning",
+                position:'top',
+                topOffset:0, 
+                text1:"password and confirm password doesn't match"
+            })
+        }
+           
+        }else {
+            console.log("All fields are required");
+            Toast.show({
+                type:"warning",
+                position:'top',
+                topOffset:0, 
+                text1:"All fields are required!"
+            })
+        }
+       
+        
+    }
+
+    const toastConfig = {
+        warning:({text1,text2}) => (
+            <View style={{height:30, width:"100%",backgroundColor:"orange", padding:4}}>
+                <Text>{text1}</Text>
+                <Text>{text2}</Text>
+            </View>
+        ),
+        done:({text1,text2}) => (
+            <View style={{height:30, width:"100%",backgroundColor:"green", padding:4}}>
+                <Text>{text1}</Text>
+                <Text>{text2}</Text>
+            </View>
+        )
+    }
   return (
     <>
     <View style={style.maincontainer}>
+    <Toast config={toastConfig} />
       <Text style={style.mainheading}>
         Sign up
       </Text>
@@ -13,26 +77,46 @@ const Signup = ({navigation}) => {
         <Text style={style.labels}>
             Enter your name
         </Text>
-        <TextInput style={style.inputstyle}/>
+        <TextInput style={style.inputstyle} 
+        value={name}
+        onChangeText={setName}
+        
+        />
     </View>
     <View style={style.inputcontainer}>
         <Text style={style.labels}>
             Enter your email
         </Text>
-        <TextInput style={style.inputstyle}/>
+        <TextInput style={style.inputstyle}
+        value={email}
+        onChangeText={setEmail}
+
+        />
     </View>
     <View style={style.inputcontainer}>
         <Text style={style.labels}>
             Enter your password
         </Text>
         <TextInput style={style.inputstyle}
-         secureTextEntry={true}/>
+         secureTextEntry={true}
+         value={password}
+         onChangeText={setPassword}
+
+         />
     </View>
-    {/* <View>
-        <Checkbox style={style.checkbox}  />
-        <Text>I've read </Text>
-    </View> */}
-    <TouchableOpacity style={style.button} onclixk >
+    <View style={style.inputcontainer}>
+        <Text style={style.labels}>
+            Enter your confirm password
+        </Text>
+        <TextInput style={style.inputstyle}
+         secureTextEntry={true}
+         value={confirmPassword}
+         onChangeText={setConfirmPassword}
+
+         />
+    </View>
+   
+    <TouchableOpacity style={style.button} onPress={(handleFormSubmit) } >
         <Text style={style.buttontext}>Next</Text>
     </TouchableOpacity>
 

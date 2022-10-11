@@ -22,6 +22,7 @@ import SucessfullDischarge from './components/DischargePatient/SucessfullDischar
 
 import { View } from 'react-native';
 import Temp from './components/AddPatient/temp';
+import Shoptab from './components/Shoptab';
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -31,10 +32,11 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName='HomeScreen'  >
         <Stack.Screen  name='HomeScreen' component={Home} options={{headerShown:false}} />
-        <Stack.Screen  name='SigninScreen' component={Signin} options={{headerShown:false}}/>
-        <Stack.Screen name='SignupScreen' component={Signup} options={{headerShown:false}}/>
+        <Stack.Screen  name='SigninScreen' component={Signin} />
+        <Stack.Screen name='SignupScreen' component={Signup} />        
+        <Stack.Screen name='Shoptab' component={Shoptab} options={{headerShown:false}}/>        
         <Stack.Screen name='Dashboard' component={Dashboard} options={{headerShown:false}}/>
-        <Stack.Screen name='Select Patient Type' component={PateintType}/>
+        <Stack.Screen name='Select Patient Type' component={PateintType} />
         <Stack.Screen name='Enter Pateint Details' component={PatientDetails}/>
         <Stack.Screen name='Sucessfull' component={SucessAdding}/>
         <Stack.Screen name='Search For Patient' component={SearchForPatient}/>

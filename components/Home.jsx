@@ -1,6 +1,8 @@
 import React from 'react'
 import bg from './Images/home.webp'
 import {View,TouchableOpacity,StyleSheet,Text,TextInput, ImageBackground} from 'react-native'
+// import { createDrawerNavigator } from 'react-navigation-drawer';
+// const Drawer = createDrawerNavigator()
 
 function Home({navigation}) {
   return (

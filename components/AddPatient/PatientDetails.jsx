@@ -38,25 +38,9 @@ const PatientDetails = ({ navigation }) => {
   };
   const handleFormSubmit = () => {
     if (
-      patientID &&
-      uniqueHID &&
-      fName &&
-      lName &&
-      email &&
-      phone &&
-      age &&
-      weight &&
-      gender &&
-      gName &&
-      gEmail &&
-      gPhone &&
-      address &&
-      city &&
-      state &&
-      country &&
-      pin &&
-      doctorID &&
-      departmentID
+      patientID && uniqueHID && fName && lName && email && phone &&
+      age && weight && gender && gName && gEmail && city &&
+      state && country && pin && doctorID && departmentID
     ) {
       console.log(" detail saved");
       clearTextInputs();

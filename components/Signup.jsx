@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { View, Text,StyleSheet, TextInput, TouchableOpacity} from "react-native";
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import Toast from 'react-native-toast-message'
+import axios from 'axios'
 
-const Signup = ({navigation}) => {
+const Signup = ({ navigation }) => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -17,167 +18,187 @@ const Signup = ({navigation}) => {
     }
 
     const handleFormSubmit = () => {
-        if(name && email && password && confirmPassword) { 
-             if(password === confirmPassword) {
-            console.log("Registration sucess");
-            const formData = {name,email,password,confirmPassword}
-            console.log(formData);
-            clearTextInputs()
-            Toast.show({
-                type:"done",
-                position:'top',
-                topOffset:0,
-                text1:"Registartion Sucessfull"
-            })
-            navigation.navigate('HomeScreen')
-        }else {
-            console.log("password and confirm password doesn't match");
-            Toast.show({
-                type:"warning",
-                position:'top',
-                topOffset:0, 
-                text1:"password and confirm password doesn't match"
-            })
-        }
-           
-        }else {
+        if (name && email && password && confirmPassword) {
+            if (password === confirmPassword) {
+                console.log("Registration sucess");
+                const formData = { name, email, password, confirmPassword }
+                console.log(formData);
+                clearTextInputs()
+                Toast.show({
+                    type: "done",
+                    position: 'top',
+                    topOffset: 0,
+                    text1: "Registartion Sucessfull"
+                })
+                postUserDetail()
+                navigation.navigate('HomeScreen')
+            } else {
+                console.log("password and confirm password doesn't match");
+                Toast.show({
+                    type: "warning",
+                    position: 'top',
+                    topOffset: 0,
+                    text1: "password and confirm password doesn't match"
+                })
+            }
+
+        } else {
             console.log("All fields are required");
             Toast.show({
-                type:"warning",
-                position:'top',
-                topOffset:0, 
-                text1:"All fields are required!"
+                type: "warning",
+                position: 'top',
+                topOffset: 0,
+                text1: "All fields are required!"
             })
         }
-       
-        
+
+
+    }
+
+    const postUserDetail = () => {
+        axios.post(
+            "http://localhost:8000/user/signup",
+            {
+                name: name,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword
+            }
+        )
+        // .then((res) => console.log("registration done"))
+        // .catch((res) => console.log("error", err))
+        try {
+            return console.log("registration done");
+        } catch (error) {
+            return console.log(error);
+        }
     }
 
     const toastConfig = {
-        warning:({text1,text2}) => (
-            <View style={{height:30, width:"100%",backgroundColor:"orange", padding:4}}>
+        warning: ({ text1, text2 }) => (
+            <View style={{ height: 30, width: "100%", backgroundColor: "orange", padding: 4 }}>
                 <Text>{text1}</Text>
                 <Text>{text2}</Text>
             </View>
         ),
-        done:({text1,text2}) => (
-            <View style={{height:30, width:"100%",backgroundColor:"green", padding:4}}>
+        done: ({ text1, text2 }) => (
+            <View style={{ height: 30, width: "100%", backgroundColor: "green", padding: 4 }}>
                 <Text>{text1}</Text>
                 <Text>{text2}</Text>
             </View>
         )
     }
-  return (
-    <>
-    <View style={style.maincontainer}>
-    <Toast config={toastConfig} />
-      <Text style={style.mainheading}>
-        Sign up
-      </Text>
-    <View style={style.inputcontainer}>
-        <Text style={style.labels}>
-            Enter your name
-        </Text>
-        <TextInput style={style.inputstyle} 
-        value={name}
-        onChangeText={setName}
-        
-        />
-    </View>
-    <View style={style.inputcontainer}>
-        <Text style={style.labels}>
-            Enter your email
-        </Text>
-        <TextInput style={style.inputstyle}
-        value={email}
-        onChangeText={setEmail}
+    return (
+        <>
+            <View style={style.maincontainer}>
+                <Toast config={toastConfig} />
+                <Text style={style.mainheading}>
+                    Sign up
+                </Text>
+                <View style={style.inputcontainer}>
+                    <Text style={style.labels}>
+                        Enter your name
+                    </Text>
+                    <TextInput style={style.inputstyle}
+                        value={name}
+                        onChangeText={setName}
 
-        />
-    </View>
-    <View style={style.inputcontainer}>
-        <Text style={style.labels}>
-            Enter your password
-        </Text>
-        <TextInput style={style.inputstyle}
-         secureTextEntry={true}
-         value={password}
-         onChangeText={setPassword}
+                    />
+                </View>
+                <View style={style.inputcontainer}>
+                    <Text style={style.labels}>
+                        Enter your email
+                    </Text>
+                    <TextInput style={style.inputstyle}
+                        value={email}
+                        onChangeText={setEmail}
 
-         />
-    </View>
-    <View style={style.inputcontainer}>
-        <Text style={style.labels}>
-            Enter your confirm password
-        </Text>
-        <TextInput style={style.inputstyle}
-         secureTextEntry={true}
-         value={confirmPassword}
-         onChangeText={setConfirmPassword}
+                    />
+                </View>
+                <View style={style.inputcontainer}>
+                    <Text style={style.labels}>
+                        Enter your password
+                    </Text>
+                    <TextInput style={style.inputstyle}
+                        secureTextEntry={true}
+                        value={password}
+                        onChangeText={setPassword}
 
-         />
-    </View>
-   
-    <TouchableOpacity style={style.button} onPress={(handleFormSubmit) } >
-        <Text style={style.buttontext}>Next</Text>
-    </TouchableOpacity>
+                    />
+                </View>
+                <View style={style.inputcontainer}>
+                    <Text style={style.labels}>
+                        Enter your confirm password
+                    </Text>
+                    <TextInput style={style.inputstyle}
+                        secureTextEntry={true}
+                        value={confirmPassword}
+                        onChangeText={setConfirmPassword}
 
-    </View>
-    
-    </>
-  );
+                    />
+                </View>
+
+                <TouchableOpacity style={style.button} onPress={(handleFormSubmit)} >
+                    <Text style={style.buttontext}>Next</Text>
+                </TouchableOpacity>
+
+            </View>
+
+        </>
+    );
 }
 const style = StyleSheet.create({
-    maincontainer:{
-        height:"100%",
-        paddingTop:30,
-        paddingHorizontal:30,
+    maincontainer: {
+        height: "100%",
+        paddingTop: 30,
+        paddingHorizontal: 30,
 
 
     },
-    mainheading:{
-        fontSize:40,
-        paddingTop:40,
-        paddingBottom:20,
-        textAlign:'center',
-        marginTop:30
+    mainheading: {
+        fontSize: 40,
+        paddingTop: 40,
+        paddingBottom: 20,
+        textAlign: 'center',
+        marginTop: 30
 
 
     },
-    inputcontainer:{
-        
-    },
-    labels:{
-        fontSize:20,
-        marginTop:15,
-        marginBottom:5,
-        lineHeight:25,
+    inputcontainer: {
 
     },
-    inputstyle:{
-        borderColor:'black',
-        borderWidth:1,
-        paddingHorizontal:10,
-        borderRadius:3
+    labels: {
+        fontSize: 20,
+        marginTop: 15,
+        marginBottom: 5,
+        lineHeight: 25,
 
     },
-    checkbox:{
-        marginTop:10,
-    },
-    button:{
-        fontSize:40,
-        marginTop:50
-    },
-    buttontext:{
-        fontSize:20,
-        borderWidth:1,
-        textAlign:'center',
-        color:"white",
-        backgroundColor:"black",
-        padding:10,
-        borderRadius:15
-        
+    inputstyle: {
+        borderColor: 'black',
+        borderWidth: 1,
+        paddingHorizontal: 10,
+        borderRadius: 3
 
-        
+    },
+    checkbox: {
+        marginTop: 10,
+    },
+    button: {
+        fontSize: 40,
+        marginTop: 50
+    },
+    buttontext: {
+        fontSize: 20,
+        borderWidth: 1,
+        textAlign: 'center',
+        color: "white",
+        backgroundColor: "black",
+        padding: 10,
+        borderRadius: 15
+
+
+
     }
 })
 

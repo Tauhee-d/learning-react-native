@@ -17,7 +17,7 @@ const Signup = ({navigation}) => {
     }
 
     const handleFormSubmit = () => {
-        if(name && email && password && confirmPassword) {
+        if(name && email && password && confirmPassword) { 
              if(password === confirmPassword) {
             console.log("Registration sucess");
             const formData = {name,email,password,confirmPassword}
@@ -29,6 +29,7 @@ const Signup = ({navigation}) => {
                 topOffset:0,
                 text1:"Registartion Sucessfull"
             })
+            navigation.navigate('HomeScreen')
         }else {
             console.log("password and confirm password doesn't match");
             Toast.show({

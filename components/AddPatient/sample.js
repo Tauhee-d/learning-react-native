@@ -1,4 +1,3 @@
-
 import {
   StyleSheet,
   Text,
@@ -128,25 +127,7 @@ const PatientDetails = ({ navigation }) => {
   const [pin, setPin] = useState("");
   const [doctorID, setDoctorID] = useState("");
   const [departmentID, setDepartmentID] = useState("");
-  // console.log("patientID:", patientID);
-  // console.log("uniqueHID:", uniqueHID);
-  // console.log("fName:", fName);
-  // console.log("lName:", lName);
-  // console.log("email:", email);
-  // console.log("phone:", phone);
-  // console.log("age:", age);
-  // console.log("weight:", weight);
-  // console.log("gender:", gender);
-  // console.log("gName:", gName);
-  // console.log("gEmail:", gEmail);
-  // console.log("gPhone:", gPhone);
-  // console.log("address:", address);
-  // console.log("city:", city);
-  // console.log("state:", state);
-  // console.log("country:", country);
-  // console.log("pin:", pin);
-  // console.log("doctorID:", doctorID);
-  // console.log("departmentID:", departmentID);
+  console.log("patientID:", patientID);
 
   const ApiPatientDetails = () => {
     axios
@@ -155,6 +136,7 @@ const PatientDetails = ({ navigation }) => {
 
         {
           patientID: patientID,
+
           uniqueHID: uniqueHID,
           fName: fName,
           lName: lName,
@@ -185,23 +167,75 @@ const PatientDetails = ({ navigation }) => {
       <View style={styles.container}>
         <Toast config={toastConfig} />
         <View style={styles.subcontainer1}>
-          <TextInput value={patientID} style={styles.subcontainer1txt} onChangeText={(e) => { setPatientID(e) }} placeholder="Patient Id"
+          <TextInput
+            value={patientID}
+            style={styles.subcontainer1txt}
+            onChangeText={(e) => {
+              setPatientID(e);
+            }}
+            placeholder="Patient Id"
           />
-          <TextInput style={styles.subcontainer1txt} placeholder="Unique Health Id" value={uniqueHID} onChangeText={(e) => setUniqueHID(e)}
+          <TextInput
+            style={styles.subcontainer1txt}
+            placeholder="Unique Health Id"
+            value={uniqueHID}
+            onChangeText={(e) => setUniqueHID(e)}
           />
-          <TextInput value={fName} onChangeText={(e) => { setFName(e) }} style={styles.subcontainer1txt} placeholder="First Name"
+          <TextInput
+            value={fName}
+            onChangeText={(e) => {
+              setFName(e);
+            }}
+            style={styles.subcontainer1txt}
+            placeholder="First Name"
           />
-          <TextInput value={lName} onChangeText={(e) => { setLName(e) }} style={styles.subcontainer1txt} placeholder="Last Name"
+          <TextInput
+            value={lName}
+            onChangeText={(e) => {
+              setLName(e);
+            }}
+            style={styles.subcontainer1txt}
+            placeholder="Last Name"
           />
-          <TextInput value={email} onChangeText={(e) => { setEmail(e) }} style={styles.subcontainer1txt} placeholder="Email"
+          <TextInput
+            value={email}
+            onChangeText={(e) => {
+              setEmail(e);
+            }}
+            style={styles.subcontainer1txt}
+            placeholder="Email"
           />
-          <TextInput style={styles.subcontainer1txt} placeholder="Phone Number" value={phone} onChangeText={(e) => { setPhone(e) }}
+          <TextInput
+            style={styles.subcontainer1txt}
+            placeholder="Phone Number"
+            value={phone}
+            onChangeText={(e) => {
+              setPhone(e);
+            }}
           />
-          <TextInput style={styles.subcontainer1txt} placeholder="Guardian Name" value={gName} onChangeText={(e) => { setGName(e) }}
+          <TextInput
+            style={styles.subcontainer1txt}
+            placeholder="Guardian Name"
+            value={gName}
+            onChangeText={(e) => {
+              setGName(e);
+            }}
           />
-          <TextInput style={styles.subcontainer1txt} placeholder="Guardian Email" value={gEmail} onChangeText={(e) => { setGEmail(e) }}
+          <TextInput
+            style={styles.subcontainer1txt}
+            placeholder="Guardian Email"
+            value={gEmail}
+            onChangeText={(e) => {
+              setGEmail(e);
+            }}
           />
-          <TextInput style={styles.subcontainer1txt} placeholder="Guardian Phone no" value={gPhone} onChangeText={(e) => { setGPhone(e) }}
+          <TextInput
+            style={styles.subcontainer1txt}
+            placeholder="Guardian Phone no"
+            value={gPhone}
+            onChangeText={(e) => {
+              setGPhone(e);
+            }}
           />
         </View>
         <View style={styles.subcontainer2}>
@@ -212,17 +246,30 @@ const PatientDetails = ({ navigation }) => {
               size={70}
             />
           </View>
-          <TextInput value={age} onChangeText={(e) => { setAge(e) }} style={styles.subtxt} placeholder="Age"
+          <TextInput
+            value={age}
+            onChangeText={(e) => {
+              setAge(e);
+            }}
+            style={styles.subtxt}
+            placeholder="Age"
           />
-          <TextInput value={weight} onChangeText={(e) => { setWeight(e) }} style={styles.subtxt} placeholder="Weight"
+          <TextInput
+            value={weight}
+            onChangeText={(e) => {
+              setWeight(e);
+            }}
+            style={styles.subtxt}
+            placeholder="Weight"
           />
 
           <View style={styles.doctor}>
             <Text style={styles.txt}>Gender:</Text>
             <View style={styles.picker}>
-
-              {/* <Picker value={gender} onTextChange={(e) => setGender(e)}> */}
-              <Picker selectedValue={gender} onValueChange={(itemValue) => setGender(itemValue)}>
+              <Picker
+                selectedValue={gender}
+                onValueChange={(itemValue, itemIndex) => setGender(itemValue)}
+              >
                 <Picker.Item label="Male" value="Male" />
                 <Picker.Item label="Female" value="Female" />
               </Picker>
@@ -231,21 +278,19 @@ const PatientDetails = ({ navigation }) => {
           <View style={styles.doctor}>
             <Text style={styles.txt}>Doctor:</Text>
             <View style={styles.picker}>
-              {/* <Picker value={doctorID} onTextChange={(e) => setDoctorID(e)}> */}
-              <Picker selectedValue={doctorID} onValueChange={(itemValue) => setDoctorID(itemValue)}>
+              {/* <Picker selectedValue={doctorID} onValueChange={(itemValue, itemIndex) => setDoctorID(itemValue)}>
                 <Picker.Item label="Dr.Zab" value="Dr.Zab" />
                 <Picker.Item label="Dr.Mac" value="Dr.Mac" />
-              </Picker>
+              </Picker> */}
             </View>
           </View>
           <View style={styles.Department}>
             <Text style={styles.txt}>Department:</Text>
             <View style={styles.picker}>
-              {/* <Picker selectedValue={departmentID} onTextChange={(e) => setDepartmentID(e)}  > */}
-              <Picker selectedValue={departmentID} onValueChange={(itemValue) => setDepartmentID(itemValue)}>
+              {/* <Picker selectedValue={departmentID} onValueChange={(itemValue, itemIndex) => setDepartmentID(itemValue)}  >
                 <Picker.Item label="Surgery" value="Surgery" />
                 <Picker.Item label="Neurology" value="Neurology" />
-              </Picker>
+              </Picker> */}
             </View>
           </View>
         </View>
@@ -257,20 +302,50 @@ const PatientDetails = ({ navigation }) => {
     return (
       <View>
         <View style={styles.phase2container2}>
-          <TextInput value={address} onChangeText={(e) => { setAddress(e) }} style={styles.s2txt1} placeholder="Address"
+          <TextInput
+            value={address}
+            onChangeText={(e) => {
+              setAddress(e);
+            }}
+            style={styles.s2txt1}
+            placeholder="Address"
           />
         </View>
         <View style={styles.container1}>
           <View style={styles.phase2container1}>
-            <TextInput value={city} onChangeText={(e) => { setCity(e) }} style={styles.c3txt1} placeholder="City"
+            <TextInput
+              value={city}
+              onChangeText={(e) => {
+                setCity(e);
+              }}
+              style={styles.c3txt1}
+              placeholder="City"
             />
-            <TextInput value={state} onChangeText={(e) => { setState(e) }} style={styles.c3txt1} placeholder="State"
+            <TextInput
+              value={state}
+              onChangeText={(e) => {
+                setState(e);
+              }}
+              style={styles.c3txt1}
+              placeholder="State"
             />
           </View>
           <View style={styles.phase2container1}>
-            <TextInput value={country} onChangeText={(e) => { setCountry(e) }} style={styles.c3txt1} placeholder="Country"
+            <TextInput
+              value={country}
+              onChangeText={(e) => {
+                setCountry(e);
+              }}
+              style={styles.c3txt1}
+              placeholder="Country"
             />
-            <TextInput value={pin} onChangeText={(e) => { setPin(e) }} style={styles.c3txt1} placeholder="Pin Code"
+            <TextInput
+              value={pin}
+              onChangeText={(e) => {
+                setPin(e);
+              }}
+              style={styles.c3txt1}
+              placeholder="Pin Code"
             />
           </View>
         </View>
@@ -282,6 +357,10 @@ const PatientDetails = ({ navigation }) => {
     return (
       <View style={styles.submit}>
         <TouchableOpacity style={styles.button} onPress={handleFormSubmit}>
+          {/* <TouchableOpacity style={styles.button} onPress={()=>{
+          ApiPatientDetails()
+        }}> */}
+          {/* <TouchableOpacity style={styles.button} onPress={onSubmit}> */}
           <Text style={styles.btntxt}>Submit</Text>
         </TouchableOpacity>
       </View>
@@ -308,7 +387,8 @@ const styles = StyleSheet.create({
   },
 
   container: {
-    flexDirection: "row", width: "100%",
+    flexDirection: "row",
+    width: "100%",
     marginTop: 30,
     justifyContent: "space-between",
   },
@@ -442,5 +522,3 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 });
-
-

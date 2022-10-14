@@ -1,231 +1,176 @@
-import {View,Text,StyleSheet,TouchableOpacity,TextInput, ActivityIndicator, FlatList,ScrollView} from 'react-native'
-import RadioForm from 'react-native-simple-radio-button';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+  ActivityIndicator,
+  FlatList,
+  ScrollView,
+} from "react-native";
+import RadioForm from "react-native-simple-radio-button";
 
-import { Ionicons,Fontisto,MaterialIcons} from '@expo/vector-icons';
+import { Ionicons, Fontisto, MaterialIcons } from "@expo/vector-icons";
 // import {Picker} from"@react-native-picker/picker";
-import  {useEffect, useState} from'react';
-import  PropsType  from 'prop-types';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import PropsType from "prop-types";
+import axios from "axios";
 
+const SearchForPatient = ({ navigation }) => {
+  const [responseData, setResponseData] = useState();
+  const [loading, setLoading] = useState(false);
 
+  const handleOnClick = () => {
+    // navigation.navigate("Patient Details");
+    console.log("clicked");
+  };
 
-const SearchForPatient = ({navigation}) =>{
-
-
-
-  useEffect(() =>{
-    patientList()
-  },[])
-
-    
-
-  const [responseData,setResponseData] = useState()
   const patientList = () => {
+    setLoading(true);
+    axios
+      .get("http://localhost:8000/addOP")
+      .then((response) => {
+        setResponseData(response.data);
+        setLoading(false);
+        // setResponseData(response.data)
+        // console.log(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
+  useEffect(() => {
+    patientList();
+  }, []);
+  const SearchBar = (props) => {
+    return (
+      <View style={style.search}>
+        <Fontisto name="search" size={25} />
+        <TextInput value={props.value} placeholder="search" />
+        {props.editing ? (
+          <TouchableOpacity onPress={props.onClear}>
+            <Text>Clear</Text>
+          </TouchableOpacity>
+        ) : null}
+        {props.loading ? <ActivityIndicator /> : null}
+      </View>
+    );
+  };
 
-  
+  SearchForPatient.PropsType = {
+    onChangeText: PropsType.func.isRequired,
+    value: PropsType.string.isRequired,
+    loading: PropsType.bool.isRequired,
+    editing: PropsType.bool.isRequired,
+    onClear: PropsType.func.isRequired,
+  };
 
-  axios
-  .get("http://localhost:8000/addOP")
-  .then((response) => {
-      setResponseData(JSON.stringify(response.data));
-      // setResponseData(response.data)
-      // console.log(response.data);
-  })
-  .catch(error => console.log(error))
-  }
+  const Body = (props) => {
+    return (
+      <View style={style.container}>
+        {loading ? (
+          <Text>Loading...</Text>
+        ) : (
+          <FlatList
+            data={responseData}
+            renderItem={({ item }) => (
+              //  {
+              //   return <Text> {item.fName}</Text>;
+              // }
+              <TouchableOpacity onPress={handleOnClick}>
+                <View style={style.body}>
+                  <View style={style.iconconatiner}>
+                    <Ionicons name="person" size={45} />
+                  </View>
+                  <View style={style.txtcontainer}>
+                    <Text style={style.heading}>
+                      {item.fName + " " + item.lName}
+                    </Text>
+                    <Text style={style.txt}>{item.patientID}</Text>
+                    <Text style={style.txt}>UHID:{item.uniqueHID}</Text>
+                    <Text style={style.txt}>Dr.ID{item.doctorID}</Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            )}
+          />
+        )}
+      </View>
+    );
+  };
 
-  
-  
-
-
-    const SearchBar = (props) => {
-        return (
-          <View style={style.search}>
-            <Fontisto name='search' size={25}/>
-            <TextInput value={props.value} placeholder='search' />
-               {props.editing ?<TouchableOpacity onPress={props.onClear}>
-              <Text>Clear</Text>
-            </TouchableOpacity> : null} 
-            {props.loading ? <ActivityIndicator/> : null}
-          </View>
-        )
-      }
-
-
- SearchForPatient.PropsType = {
-    onChangeText : PropsType.func.isRequired,
-    value : PropsType.string.isRequired,
-    loading : PropsType.bool.isRequired,
-    editing : PropsType.bool.isRequired,
-    onClear : PropsType.func.isRequired
- }
-
-      const Body = (props) => {
-
-        // console.log(patientList);
-        return(
-
-          
-          
-          
-        
-          <View style={style.container}>
-            
-            <FlatList
-            data={[responseData]}
-            renderItem={(data)=>{
-              // console.log(data.item)
-              return (<Text> {data.item} </Text>) 
-              
-              
-            }}
-            />
-
-
-{/* <FlatList> */}
-
-  {/* <View>
-            {
-              responseData.map((item)=> <Text>{item.fName}</Text>)
-            }
-  </View> */}
-{/* {
-  responseData.map((patientList) => {
-
-          <TouchableOpacity onPress={ () => navigation.navigate('Patient Details')}
-                style={style.subcontainer}>
-                      <View>
-                        <Ionicons name='person' size={35} />
-                      </View>
-                      <View style={style.txtcontainer}>
-                        <Text style={style.heading}>cnjkcdxj</Text>
-                        <Text style={style.txt}>patientID:</Text>
-                        <Text style={style.txt}>UHID:</Text>
-                        <Text style={style.txt}>Dr.xyz</Text>
-                        <Text style={style.txt}>Added On:</Text>
-                      </View>
-                </TouchableOpacity>
-  })
-} */}
-      {/* </FlatList> */}
-
-
-            {/* <FlatList data={record.patientData} keyExtractor={(item,index)}
-              renderItem={({item}) => {
-                return */}
-                {/* <TouchableOpacity onPress={ () => navigation.navigate('Patient Details')}
-                style={style.subcontainer}>
-                      <View>
-                        <Ionicons name='person' size={35} />
-                      </View>
-                      <View style={style.txtcontainer}>
-                        <Text style={style.heading}>Abc</Text>
-                        <Text style={style.txt}>patientID:</Text>
-                        <Text style={style.txt}>UHID:</Text>
-                        <Text style={style.txt}>Dr.xyz</Text>
-                        <Text style={style.txt}>Added On:</Text>
-                      </View>
-                </TouchableOpacity> */}
-       
-       
-          
-        
-        
-          
-         
-        </View>
-      
-
-        )
-      }
-
-
-  return(
-    <View style={style.maincontainer} >
-    <View style={style.container}>
-        <SearchBar/>
-        <Body/>
-
-        
-    
+  return (
+    <View style={style.maincontainer}>
+      <View style={style.container}>
+        <SearchBar />
+        <Body />
+      </View>
     </View>
-    </View>
-
-    
-
-
-  )  
-}
+  );
+};
 
 const style = StyleSheet.create({
-   
+  maincontainer: {
+    height: "100%",
+    width: "100%",
+    justifycontent: "center",
+    alignItems: "center",
+    backgroundColor: "#ebedfa",
+    padding: 10,
+  },
+  search: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    borderWidth: 1,
+    padding: 5,
+    borderRadius: 30,
+    backgroundColor: "white",
+  },
 
-
-
-    maincontainer: {
-        height: "100%",
-        width: "100%",
-        justifycontent: "center",
-        alignItems: "center",
-        backgroundColor: "#ebedfa",
-        padding:10
-      },
-      search:{
-        
-        width:'100%',
-        flexDirection:'row',
-        justifyContent:'flex-start',
-        alignItems:'center',
-        borderWidth:1,
-        padding:5,
-        borderRadius:30,
-        backgroundColor:'white'
-
-      },
-      
-      container:{
-        height:'100%',
-        width:'100%',
-        padding:5,
-      },
-      subcontainer:{
-        backgroundColor:'white',
-        margin:5,
-        justifycontent: "center",
-        alignItems: "center",
-        flexDirection:'row',
-        padding:5,
-        shadowOffset: {
-          width: 0,
-          height: 6,
-        },
-        shadowOpacity:  0.20,
-        shadowRadius: 5,
-        elevation: 5
-      },
-      heading:{
-        fontSize:20
-      },
-      txtcontainer:{
-        marginLeft:10
-      },
-    dateAndGender:{
-        flexDirection:'row',
-        justifyContent:'space-around',
-        width:'100%'
-
+  container: {
+    height: "100%",
+    width: "100%",
+    padding: 5,
+  },
+  subcontainer: {
+    backgroundColor: "white",
+    margin: 5,
+    justifycontent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    padding: 5,
+    shadowOffset: {
+      width: 0,
+      height: 6,
     },
-    gender:{
-        flexDirection:'row',
-        
-    },
-    
-   
-    
-    
-})
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 5,
+  },
+  heading: {
+    fontSize: 20,
+  },
+  txtcontainer: {
+    marginLeft: 20,
+  },
+  dateAndGender: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "100%",
+  },
+  gender: {
+    flexDirection: "row",
+  },
+  body: {
+    flexDirection: "row",
+    backgroundColor: "white",
+    margin: 4,
+    padding: 4,
+  },
+  iconconatiner: {
+    justifyContent: "center",
+    marginLeft: 20,
+  },
+});
 
-export default SearchForPatient ; 
-
-
-
+export default SearchForPatient;

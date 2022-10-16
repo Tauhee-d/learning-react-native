@@ -68,7 +68,8 @@ const Signup = ({ navigation }) => {
         // .then((res) => console.log("registration done"))
         // .catch((res) => console.log("error", err))
         try {
-            return console.log("registration done");
+
+            return console.log("registration done")
         } catch (error) {
             return console.log(error);
         }

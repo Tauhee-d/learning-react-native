@@ -34,8 +34,7 @@ const SearchForPatient = ({ navigation }) => {
       .then((response) => {
         setResponseData(response.data);
         setLoading(false);
-        // setResponseData(response.data)
-        // console.log(response.data);
+
       })
       .catch((error) => console.log(error));
   };

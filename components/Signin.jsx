@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import Toast from "react-native-toast-message";
 
-
 const Signin = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,6 +16,34 @@ const Signin = ({ navigation }) => {
   const clearTextInputs = () => {
     setEmail("");
     setPassword("");
+  };
+  const toastConfig = {
+    warning: ({ text1, text2 }) => (
+      <View
+        style={{
+          height: 30,
+          width: "100%",
+          backgroundColor: "orange",
+          padding: 4,
+        }}
+      >
+        <Text>{text1}</Text>
+        <Text>{text2}</Text>
+      </View>
+    ),
+    done: ({ text1, text2 }) => (
+      <View
+        style={{
+          height: 30,
+          width: "100%",
+          backgroundColor: "green",
+          padding: 4,
+        }}
+      >
+        <Text>{text1}</Text>
+        <Text>{text2}</Text>
+      </View>
+    ),
   };
 
   const handleFormSubmit = () => {
@@ -31,7 +58,6 @@ const Signin = ({ navigation }) => {
     )
       .then((res) => {
         if (res.status === 200) {
-
           clearTextInputs();
           Toast.show({
             type: "done",
@@ -56,7 +82,8 @@ const Signin = ({ navigation }) => {
           type: "warning",
           position: "top",
           topOffset: 0,
-          text1: error.message,
+          // text1: error.message,
+          text1: error.response.data.error,
         });
       })
 
@@ -68,7 +95,7 @@ const Signin = ({ navigation }) => {
   return (
     <>
       <View style={style.maincontainer}>
-
+        <Toast config={toastConfig} />
         <Text style={style.mainheading}>Sign in</Text>
 
         <View style={style.inputcontainer}>

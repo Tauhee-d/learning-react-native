@@ -4,9 +4,11 @@ import {
   Text,
   View,
   ScrollView,
-  TextInput,
+  // TextInput,
   TouchableOpacity,
 } from "react-native";
+import { TextInput } from 'react-native-paper';
+
 import { useState } from "react";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 // import RNPickerSelect from "react-native-picker-select";
@@ -169,23 +171,23 @@ const PatientDetails = ({ navigation }) => {
       <View style={styles.container}>
         <Toast config={toastConfig} />
         <View style={styles.subcontainer1}>
-          <TextInput value={patientID} style={styles.subcontainer1txt} onChangeText={(e) => { setPatientID(e) }} placeholder="Patient Id"
+          <TextInput mode={"outlined"} value={patientID} style={styles.subcontainer1txt} onChangeText={(e) => { setPatientID(e) }} placeholder="Patient Id"
           />
-          <TextInput style={styles.subcontainer1txt} placeholder="Unique Health Id" value={uniqueHID} onChangeText={(e) => setUniqueHID(e)}
+          <TextInput mode={"outlined"} style={styles.subcontainer1txt} placeholder="Unique Health Id" value={uniqueHID} onChangeText={(e) => setUniqueHID(e)}
           />
-          <TextInput value={fName} onChangeText={(e) => { setFName(e) }} style={styles.subcontainer1txt} placeholder="First Name"
+          <TextInput mode={"outlined"} value={fName} onChangeText={(e) => { setFName(e) }} style={styles.subcontainer1txt} placeholder="First Name"
           />
-          <TextInput value={lName} onChangeText={(e) => { setLName(e) }} style={styles.subcontainer1txt} placeholder="Last Name"
+          <TextInput mode={"outlined"} value={lName} onChangeText={(e) => { setLName(e) }} style={styles.subcontainer1txt} placeholder="Last Name"
           />
-          <TextInput value={email} onChangeText={(e) => { setEmail(e) }} style={styles.subcontainer1txt} placeholder="Email"
+          <TextInput mode={"outlined"} value={email} onChangeText={(e) => { setEmail(e) }} style={styles.subcontainer1txt} placeholder="Email"
           />
-          <TextInput style={styles.subcontainer1txt} placeholder="Phone Number" value={phone} onChangeText={(e) => { setPhone(e) }}
+          <TextInput mode={"outlined"} style={styles.subcontainer1txt} placeholder="Phone Number" value={phone} onChangeText={(e) => { setPhone(e) }}
           />
-          <TextInput style={styles.subcontainer1txt} placeholder="Guardian Name" value={gName} onChangeText={(e) => { setGName(e) }}
+          <TextInput mode={"outlined"} style={styles.subcontainer1txt} placeholder="Guardian Name" value={gName} onChangeText={(e) => { setGName(e) }}
           />
-          <TextInput style={styles.subcontainer1txt} placeholder="Guardian Email" value={gEmail} onChangeText={(e) => { setGEmail(e) }}
+          <TextInput mode={"outlined"} style={styles.subcontainer1txt} placeholder="Guardian Email" value={gEmail} onChangeText={(e) => { setGEmail(e) }}
           />
-          <TextInput style={styles.subcontainer1txt} placeholder="Guardian Phone no" value={gPhone} onChangeText={(e) => { setGPhone(e) }}
+          <TextInput mode={"outlined"} style={styles.subcontainer1txt} placeholder="Guardian Phone no" value={gPhone} onChangeText={(e) => { setGPhone(e) }}
           />
         </View>
         <View style={styles.subcontainer2}>
@@ -196,9 +198,9 @@ const PatientDetails = ({ navigation }) => {
               size={70}
             />
           </View>
-          <TextInput value={age} onChangeText={(e) => { setAge(e) }} style={styles.subtxt} placeholder="Age"
+          <TextInput mode={"outlined"} value={age} onChangeText={(e) => { setAge(e) }} style={styles.subtxt} placeholder="Age"
           />
-          <TextInput value={weight} onChangeText={(e) => { setWeight(e) }} style={styles.subtxt} placeholder="Weight"
+          <TextInput mode={"outlined"} value={weight} onChangeText={(e) => { setWeight(e) }} style={styles.subtxt} placeholder="Weight"
           />
 
           <View style={styles.doctor}>
@@ -240,21 +242,22 @@ const PatientDetails = ({ navigation }) => {
   const Phase2 = () => {
     return (
       <View>
-        <View style={styles.phase2container2}>
-          <TextInput value={address} onChangeText={(e) => { setAddress(e) }} style={styles.s2txt1} placeholder="Address"
-          />
-        </View>
+        {/* <View style={styles.phase2container2}> */}
+        <TextInput mode={"outlined"} value={address} onChangeText={(e) => { setAddress(e) }} style={styles.s2txt1} placeholder="Address"
+        />
+
+        {/* </View> */}
         <View style={styles.container1}>
           <View style={styles.phase2container1}>
-            <TextInput value={city} onChangeText={(e) => { setCity(e) }} style={styles.c3txt1} placeholder="City"
+            <TextInput mode={"outlined"} value={city} onChangeText={(e) => { setCity(e) }} style={styles.c3txt1} placeholder="City"
             />
-            <TextInput value={state} onChangeText={(e) => { setState(e) }} style={styles.c3txt1} placeholder="State"
+            <TextInput mode={"outlined"} value={state} onChangeText={(e) => { setState(e) }} style={styles.c3txt1} placeholder="State"
             />
           </View>
           <View style={styles.phase2container1}>
-            <TextInput value={country} onChangeText={(e) => { setCountry(e) }} style={styles.c3txt1} placeholder="Country"
+            <TextInput mode={"outlined"} value={country} onChangeText={(e) => { setCountry(e) }} style={styles.c3txt1} placeholder="Country"
             />
-            <TextInput value={pin} onChangeText={(e) => { setPin(e) }} style={styles.c3txt1} placeholder="Pin Code"
+            <TextInput mode={"outlined"} value={pin} onChangeText={(e) => { setPin(e) }} style={styles.c3txt1} placeholder="Pin Code"
             />
           </View>
         </View>
@@ -305,31 +308,30 @@ const styles = StyleSheet.create({
   },
   subcontainer2: {
     width: "40%",
-    // justifyContent:'center',
-    alignItems: "center",
+    // alignItems: "center",
   },
   subcontainer1txt: {
     fontSize: 15,
-    backgroundColor: "white",
-    padding: 10,
-    borderRadius: 20,
-    borderWidth: 2,
-    borderColor: "#d9d9d9",
-    alignItems: "center",
+    //   backgroundColor: "white",
+    //   padding: 10,
+    // borderRadius: 20,
+    // borderWidth: 2,
+    // borderColor: "#d9d9d9",
+    // alignItems: "center",
     textAlign: "center",
     marginTop: 10,
   },
   subtxt: {
     fontSize: 15,
-    backgroundColor: "white",
-    padding: 10,
-    borderRadius: 20,
-    borderWidth: 2,
-    borderColor: "#d9d9d9",
-    alignItems: "center",
+    //   backgroundColor: "white",
+    //   padding: 10,
+    //   borderRadius: 20,
+    //   borderWidth: 2,
+    //   borderColor: "#d9d9d9",
+    //   alignItems: "center",
     textAlign: "center",
     marginTop: 10,
-    width: 130,
+    //   width: 130,
   },
 
   submit: {
@@ -375,28 +377,41 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 2,
     borderColor: "#d9d9d9",
-    justifyContent: "center",
-    alignItems: "center",
+    // justifyContent: "center",
+    // alignItems: "center",
     padding: 10,
+    marginTop: 10,
+  },
+  s2txt1: {
+    fontSize: 15,
+    //   backgroundColor: "white",
+    //   padding: 10,
+    // borderRadius: 20,
+    // borderWidth: 2,
+    // borderColor: "#d9d9d9",
+    // alignItems: "center",
+    textAlign: "center",
     marginTop: 10,
   },
 
   c3txt1: {
-    backgroundColor: "white",
-    borderRadius: 20,
-    borderWidth: 2,
-    borderColor: "#d9d9d9",
+    //   backgroundColor: "white",
+    //   borderRadius: 20,
+    //   borderWidth: 2,
+    //   borderColor: "#d9d9d9",
     textAlign: "center",
-    padding: 10,
+    //   padding: 10,
     width: 160,
     marginTop: 10,
   },
 
   doctor: {
+    // height: 100,
     width: "100%",
     color: "black",
     padding: 5,
     marginTop: 20,
+    marginBottom: 20,
     shadowOffset: {
       width: 0,
       height: 6,

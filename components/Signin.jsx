@@ -4,10 +4,11 @@ import {
   View,
   Text,
   StyleSheet,
-  TextInput,
   TouchableOpacity,
 } from "react-native";
+import { TextInput } from 'react-native-paper';
 import Toast from "react-native-toast-message";
+
 
 const Signin = ({ navigation }) => {
   const [email, setEmail] = useState("");

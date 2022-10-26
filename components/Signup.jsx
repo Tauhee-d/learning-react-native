@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { TextInput } from "react-native-paper";
 import Toast from 'react-native-toast-message'
 import axios from 'axios'
+
 
 const Signup = ({ navigation }) => {
     const [name, setName] = useState("")
@@ -100,7 +102,7 @@ const Signup = ({ navigation }) => {
                     <Text style={style.labels}>
                         Enter your name
                     </Text>
-                    <TextInput style={style.inputstyle}
+                    <TextInput mode={'outlined'} style={style.inputstyle}
                         value={name}
                         onChangeText={setName}
 
@@ -110,7 +112,7 @@ const Signup = ({ navigation }) => {
                     <Text style={style.labels}>
                         Enter your email
                     </Text>
-                    <TextInput style={style.inputstyle}
+                    <TextInput mode={'outlined'} style={style.inputstyle}
                         value={email}
                         onChangeText={setEmail}
 
@@ -120,7 +122,7 @@ const Signup = ({ navigation }) => {
                     <Text style={style.labels}>
                         Enter your password
                     </Text>
-                    <TextInput style={style.inputstyle}
+                    <TextInput mode={'outlined'} style={style.inputstyle}
                         secureTextEntry={true}
                         value={password}
                         onChangeText={setPassword}
@@ -131,7 +133,7 @@ const Signup = ({ navigation }) => {
                     <Text style={style.labels}>
                         Enter your confirm password
                     </Text>
-                    <TextInput style={style.inputstyle}
+                    <TextInput mode={'outlined'} style={style.inputstyle}
                         secureTextEntry={true}
                         value={confirmPassword}
                         onChangeText={setConfirmPassword}
@@ -177,9 +179,10 @@ const style = StyleSheet.create({
     },
     inputstyle: {
         borderColor: 'black',
-        borderWidth: 1,
+        // borderWidth: 1,
         paddingHorizontal: 10,
-        borderRadius: 3
+        borderRadius: 3,
+        height: 50
 
     },
     checkbox: {

@@ -11,6 +11,7 @@ import Toast from "react-native-toast-message";
 
 
 const Signin = ({ navigation }) => {
+  const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -48,8 +49,9 @@ const Signin = ({ navigation }) => {
   };
 
   const handleFormSubmit = () => {
-
+    setLoading(true)
     axios.post(
+      // "http://10.0.2.2:8000/user/signin",
       "http://localhost:8000/user/signin",
       {
         email: email,
@@ -67,6 +69,7 @@ const Signin = ({ navigation }) => {
             text1: res.statusText,
           });
           navigation.navigate('Shoptab')
+          setLoading(false)
 
         } else {
 
@@ -76,6 +79,8 @@ const Signin = ({ navigation }) => {
             topOffset: 0,
             text1: res.statusText,
           });
+          setLoading(false)
+
         }
 
       }).catch((error) => {
@@ -86,6 +91,8 @@ const Signin = ({ navigation }) => {
           // text1: error.message,
           text1: error.response.data.error,
         });
+        setLoading(false)
+
       })
 
 
@@ -106,6 +113,7 @@ const Signin = ({ navigation }) => {
             value={email}
             onChangeText={setEmail}
             keyboardType={"email-address"}
+            mode={"outlined"}
           />
         </View>
         <View style={style.inputcontainer}>
@@ -115,13 +123,19 @@ const Signin = ({ navigation }) => {
             secureTextEntry={true}
             value={password}
             onChangeText={setPassword}
+            mode={"outlined"}
           />
         </View>
 
         <TouchableOpacity style={style.button} onPress={handleFormSubmit}>
           {/* => navigation.navigate('Shoptab') */}
           <Text style={style.buttontext}>Sign in</Text>
+          {loading ? (
+            <Text style={style.loadingstyle}>Loading...</Text>
+          ) : null
+          }
         </TouchableOpacity>
+
       </View>
     </>
   );
@@ -148,13 +162,16 @@ const style = StyleSheet.create({
   },
   inputstyle: {
     borderColor: "black",
-    borderWidth: 1,
+    // borderWidth: 1,
     paddingHorizontal: 10,
     borderRadius: 3,
+    height: 50
   },
   button: {
     fontSize: 40,
     marginTop: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttontext: {
     borderRadius: 15,
@@ -164,8 +181,14 @@ const style = StyleSheet.create({
     color: "white",
     backgroundColor: "black",
     padding: 10,
+    width: '100%'
   },
-  inputcontainer: {},
+  loadingstyle: {
+    // width: '100%',
+    // justifyContent: 'center',
+    // alignItems: 'center'
+    // marginRight: 50
+  },
 });
 
 export default Signin;

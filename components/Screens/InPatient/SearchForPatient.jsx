@@ -5,13 +5,11 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  TextInput,
   ActivityIndicator,
   FlatList,
   ScrollView,
 } from "react-native";
-import RadioForm from "react-native-simple-radio-button";
-
+import { TextInput } from 'react-native-paper'
 import { Ionicons, Fontisto, MaterialIcons } from "@expo/vector-icons";
 // import {Picker} from"@react-native-picker/picker";
 import { useEffect, useState } from "react";
@@ -20,11 +18,17 @@ import axios from "axios";
 
 const SearchForPatient = ({ navigation }) => {
   const [responseData, setResponseData] = useState();
+  // const [masterData, setMasterData] = useState();
+  const [searchData, setSearchData] = useState(searchData);
   const [loading, setLoading] = useState(false);
 
+  const handleOnFilter = () => {
+    navigation.navigate("Filter")
+  }
+
   const handleOnClick = () => {
-    // navigation.navigate("Patient Details");
-    console.log("clicked");
+    navigation.navigate("OutPatientDetails");
+    // console.log("clicked");
   };
 
   const patientList = () => {
@@ -33,6 +37,7 @@ const SearchForPatient = ({ navigation }) => {
       .get("http://localhost:8000/addOP")
       .then((response) => {
         setResponseData(response.data);
+        // setMasterData(response.data);
         setLoading(false);
 
       })
@@ -41,30 +46,52 @@ const SearchForPatient = ({ navigation }) => {
   useEffect(() => {
     patientList();
   }, []);
-  const SearchBar = (props) => {
+  // const filter = () => {
+
+  // }
+
+  // const searchFilter = (text) => {
+  //   if (text) {
+  //     const newData = masterData.filter((item) => {
+  //       const itemData = item.fName + " " + item.lName ?
+  //         item.fName + " " + item.lName.toUpperCase() : ''.toUpperCase();
+  //       const textData = text.toUpperCase();
+  //       return itemData.indexOf(textData) > -1;
+  //     })
+  //     setResponseData(newData)
+  //     setSearchData(text)
+  //   } else {
+  //     setResponseData(masterData)
+  //     setSearchData(text)
+
+  //   }
+  // }
+
+  const searchFilter = (text) => {
+    const data = searchData
+    // const search = data.filter((item) => {
+    // return item.fName + " " + item.lName.toLowerCase().includes(text.toLowerCase())
+    // })
+    // setSearchData = (search)
+  }
+  const SearchBar = () => {
     return (
-      <View style={style.search}>
-        <Fontisto name="search" size={25} />
-        <TextInput value={props.value} placeholder="search" />
-        {props.editing ? (
-          <TouchableOpacity onPress={props.onClear}>
-            <Text>Clear</Text>
-          </TouchableOpacity>
-        ) : null}
-        {props.loading ? <ActivityIndicator /> : null}
+      <View>
+        <TouchableOpacity onPress={handleOnFilter} ><Text>Filter</Text></TouchableOpacity>
+        <View style={style.search}>
+          <TextInput style={style.searchtxt}
+            value={searchData}
+            placeholder={'Type Something'}
+            onChangeText={(text) => searchFilter(text)}
+          />
+        </View>
       </View>
     );
   };
 
-  SearchForPatient.PropsType = {
-    onChangeText: PropsType.func.isRequired,
-    value: PropsType.string.isRequired,
-    loading: PropsType.bool.isRequired,
-    editing: PropsType.bool.isRequired,
-    onClear: PropsType.func.isRequired,
-  };
 
-  const Body = (props) => {
+
+  const Body = () => {
     return (
       <View style={style.container}>
         {loading ? (
@@ -73,9 +100,7 @@ const SearchForPatient = ({ navigation }) => {
           <FlatList
             data={responseData}
             renderItem={({ item }) => (
-              //  {
-              //   return <Text> {item.fName}</Text>;
-              // }
+
               <TouchableOpacity onPress={handleOnClick}>
                 <View style={style.body}>
                   <View style={style.iconconatiner}>
@@ -122,10 +147,21 @@ const style = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
-    borderWidth: 1,
-    padding: 5,
+    // borderWidth: 1,
+    // padding: 3,
     borderRadius: 30,
     backgroundColor: "white",
+  },
+  searchtxt: {
+    height: 30,
+    width: '100%',
+    backgroundColor: 'white',
+    // borderWidth: 1,
+    borderRadius: 10,
+    padding: 7,
+    borderTopEndRadius: 10,
+    borderTopLeftRadius: 10
+
   },
 
   container: {
